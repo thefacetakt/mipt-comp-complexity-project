@@ -1,0 +1,162 @@
+%------------------------------------------------------------------------------
+% Beginning of journal.tex
+%------------------------------------------------------------------------------
+%
+% AMS-LaTeX version 2 sample file for journals, based on amsart.cls.
+%
+%        ***     DO NOT USE THIS FILE AS A STARTER.      ***
+%        ***  USE THE JOURNAL-SPECIFIC *.TEMPLATE FILE.  ***
+%
+% Replace amsart by the documentclass for the target journal, e.g., tran-l.
+%
+
+\documentclass{amsart}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage[english, russian]{babel}
+
+
+%     If your article includes graphics, uncomment this command.
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{algpseudocode}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{xca}[theorem]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{equation}{section}
+
+%    Absolute value notation
+\newcommand{\abs}[1]{\lvert#1\rvert}
+
+%    Blank box placeholder for figures (to avoid requiring any
+%    particular graphics capabilities for printing this document).
+\newcommand{\blankbox}[2]{%
+  \parbox{\columnwidth}{\centering
+%    Set fboxsep to 0 so that the actual size of the box will match the
+%    given measurements more closely.
+    \setlength{\fboxsep}{0pt}%
+    \fbox{\raisebox{0pt}[#2]{\hspace{#1}}}%
+  }%
+}
+
+
+\begin{document}
+
+\title{Выполнимость 3-КНФ}
+
+%    Information for first author
+\author{Каргальцев Степан}
+%    Address of record for the research reported here
+\address{МФТИ, 494}
+%    Current address
+\email{stepikmvk@gmail.com}
+
+\date{Декабрь 2016}
+
+\keywords{Differential geometry, algebraic geometry}
+
+\maketitle
+
+
+
+
+\section{Постановка задачи}
+Построить и имплементировать алгоритм, про который можно доказать следующее:
+\begin{itemize}
+\item Он распознает выполнимость 3-КНФ;
+\item В случае P = NP он делает это за полиномиальное время
+\end{itemize}
+
+\section{Решение}
+
+\subsection{Основное решение}
+
+\subsubsection{Описание решения}
+Мы предполагаем, что P=NP. Тогда существует машина Тьюринга,
+которая за полиномиальное время по выполнимой формуле ищет выполняющий набор.
+
+Запустим следующий псевдокод:
+
+\begin{algorithmic}
+\If {$i\geq maxval$}
+    \State $i\gets 0$
+\Else
+    \If {$i+k\leq maxval$}
+        \State $i\gets i+k$
+    \EndIf
+\EndIf
+\end{algorithmic}
+
+\algblock[Name]{Start}{End}
+\algblockdefx[NAME]{START}{END}%
+    [2][Unknown]{Start #1(#2)}%
+    {Ending}
+\algblockdefx[NAME]{}{OTHEREND}%
+    [1]{Until (#1)}
+\begin{algorithmic}
+\Start
+    \Start
+        \START[One]{x}
+        \END
+        \START{0}
+        \OTHEREND{\texttt{True}}
+    \End
+    \Start
+    \End
+\End
+\end{algorithmic}
+
+% \begin{algorithmic}
+%     Вход: 3-кнф формула phi
+%     Выход:
+%     def check_3sat(phi):
+%         if is_not_3cnf(phi):
+%             return False
+%         for N in 1..infty
+%             for M in 1..infty
+%                 Запустить машину Тьюринга M на N шагов с входом phi
+%                 Если получили выполняющий набор то True
+% \end{algorithmic}
+
+\subsubsection{Структура кода}
+
+\subsubsection{Тестирование основного решения}
+
+\subsection{Дополнительные решения}
+
+\subsubsection{Тестирование дополнительного решения 1}
+
+
+
+
+
+
+\bibliographystyle{amsplain}
+\begin{thebibliography}{10}
+
+\bibitem  https://en.wikipedia.org/wiki/P\_versus\_NP\_problem
+
+\bibitem {B} R. Brown, \textit{On a conjecture of Dirichlet},
+Amer. Math. Soc., Providence, RI, 1993.
+
+\bibitem {D} R. A. DeVore, \textit{Approximation of functions},
+Proc. Sympos. Appl. Math., vol. 36,
+Amer. Math. Soc., Providence, RI, 1986, pp. 34--56.
+
+\end{thebibliography}
+
+\end{document}
+
+%------------------------------------------------------------------------------
+% End of journal.tex
+%------------------------------------------------------------------------------
