@@ -1,6 +1,7 @@
 import unittest
 from solutions.stupid import generate_estimations, check_3sat
 from cnf_utils import check_3cnf, run_3cnf
+from solutions import dpll
 
 
 class TestStupidSolution(unittest.TestCase):
@@ -29,6 +30,25 @@ class TestStupidSolution(unittest.TestCase):
 
     def if_solution_false(self, phi):
         result = check_3sat(phi)
+        self.assertFalse(result[0])
+
+    def test_solution(self):
+        self.if_solution_true("0|1|10")
+        self.if_solution_true("0|0|0")
+        self.if_solution_true("~0|~1|10")
+        self.if_solution_true("~0|~1|~10&0|1|10")
+        self.if_solution_true("~0|~1|~10&0|0|0")
+        self.if_solution_false("~0|~0|~0&0|0|0")
+
+
+class TestDPLL(unittest.TestCase):
+    def if_solution_true(self, phi):
+        result = dpll.check_3sat(phi)
+        self.assertTrue(result[0])
+        self.assertTrue(run_3cnf(check_3cnf(phi)[1], result[1]))
+
+    def if_solution_false(self, phi):
+        result = dpll.check_3sat(phi)
         self.assertFalse(result[0])
 
     def test_solution(self):
