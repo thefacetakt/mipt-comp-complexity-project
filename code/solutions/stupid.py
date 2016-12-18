@@ -11,7 +11,7 @@ def generate_estimations(n, i=0, current=[]):
             yield _
 
 
-def check_sat(phi):
+def check_3sat(phi):
     disjuncts, n = check_3cnf(phi)[1:]
     for est in generate_estimations(n):
         if (run_3cnf(copy.deepcopy(disjuncts), est)):

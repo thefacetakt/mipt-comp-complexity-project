@@ -4,18 +4,18 @@ import operator
 
 def check_3cnf(phi):
     numbers = []
-    disjuncts = phi.split("and")
+    disjuncts = phi.split("&")
     for i in range(len(disjuncts)):
-        disjuncts[i] = disjuncts[i].split("or")
+        disjuncts[i] = disjuncts[i].split("|")
         if (len(disjuncts[i]) != 3):
             return (False, "invalid number of literals in disjunct %s" %
                            disjuncts[i])
         for j in range(3):
-            disjuncts[i][j] = disjuncts[i][j].split("not")
+            disjuncts[i][j] = disjuncts[i][j].split("~")
             if not (1 <= len(disjuncts[i][j]) <= 2):
                 return (False, "invalid literal %s" % str(disjuncts[i][j]))
             try:
-                disjuncts[i][j][-1] = int(disjuncts[i][j][-1])
+                disjuncts[i][j][-1] = int(disjuncts[i][j][-1], 2)
                 numbers += [disjuncts[i][j][-1]]
             except ValueError:
                 return (False, "invalid literal %s" % disjuncts[i][j])
@@ -26,6 +26,9 @@ def check_3cnf(phi):
 
 
 def run_3cnf(disjuncts, est):
+    for i in range(len(est)):
+        if est[i] != 0 and est[i] != 1:
+            return False
     for i in range(len(disjuncts)):
         for j in range(3):
             disjuncts[i][j][-1] = est[disjuncts[i][j][-1]]

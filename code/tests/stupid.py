@@ -1,5 +1,5 @@
 import unittest
-from solutions.stupid import generate_estimations, check_sat
+from solutions.stupid import generate_estimations, check_3sat
 from cnf_utils import check_3cnf, run_3cnf
 
 
@@ -23,21 +23,21 @@ class TestStupidSolution(unittest.TestCase):
                           [1, 1, 1]])
 
     def if_solution_true(self, phi):
-        result = check_sat(phi)
+        result = check_3sat(phi)
         self.assertTrue(result[0])
         self.assertTrue(run_3cnf(check_3cnf(phi)[1], result[1]))
 
     def if_solution_false(self, phi):
-        result = check_sat(phi)
+        result = check_3sat(phi)
         self.assertFalse(result[0])
 
     def test_solution(self):
-        self.if_solution_true("0 or 1 or 2")
-        self.if_solution_true("0 or 0 or 0")
-        self.if_solution_true("not 0 or not 1 or 2")
-        self.if_solution_true("not 0 or not 1 or not 2 and 0 or 1 or 2")
-        self.if_solution_true("not 0 or not 1 or 2 and 0 or 0 or 0")
-        self.if_solution_false("0 or 0 or 0 and not 0 or not 0 or not 0")
+        self.if_solution_true("0|1|10")
+        self.if_solution_true("0|0|0")
+        self.if_solution_true("~0|~1|10")
+        self.if_solution_true("~0|~1|~10&0|1|10")
+        self.if_solution_true("~0|~1|~10&0|0|0")
+        self.if_solution_false("~0|~0|~0&0|0|0")
 
 
 if __name__ == '__main__':
