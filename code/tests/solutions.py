@@ -39,6 +39,7 @@ class TestStupidSolution(unittest.TestCase):
         self.if_solution_true("~0|~1|~10&0|1|10")
         self.if_solution_true("~0|~1|~10&0|0|0")
         self.if_solution_false("~0|~0|~0&0|0|0")
+        self.if_solution_true("0|1|10&~0|1|10&~0|~1|10&~10|~10|~10")
 
 
 class TestDPLL(unittest.TestCase):
@@ -58,6 +59,8 @@ class TestDPLL(unittest.TestCase):
         self.if_solution_true("~0|~1|~10&0|1|10")
         self.if_solution_true("~0|~1|~10&0|0|0")
         self.if_solution_false("~0|~0|~0&0|0|0")
+        self.if_solution_true("0|1|10&~0|1|10&~0|~1|10&~10|~10|~10")
+
 
 
 if __name__ == '__main__':

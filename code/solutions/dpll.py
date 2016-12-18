@@ -1,4 +1,5 @@
 from cnf_utils import run_3cnf, check_3cnf
+import copy
 
 
 def get_value(literal, variable):
@@ -32,24 +33,27 @@ def unit_propagate(phi, rho):
 
 def dpll(phi, rho, n):
     if (not unit_propagate(phi, rho)):
-        return False
+        return (False, None)
     if (len(rho) == n):
         est = [int(rho[i]) if i in rho else 0 for i in range(n)]
         new_phi = [list(i) for i in phi]
         for i in new_phi:
             for j in range(len(i)):
                 i[j] = list(i[j])
+        if not (new_phi):
+            return (True, est)
         if run_3cnf(new_phi, est):
             return (True, est)
-        return False
+        return (False, None)
     for i in range(n):
         if (i not in rho):
             rho[i] = True
-            result = dpll(phi, rho, n)
-            if (result):
+
+            result = dpll(copy.deepcopy(phi), copy.deepcopy(rho), n)
+            if (result[0]):
                 return result
-            pho[i] = False
-            return dpll(phi, rho, n)
+            rho[i] = False
+            return dpll(copy.deepcopy(phi), copy.deepcopy(rho), n)
 
 
 def check_3sat(phi):

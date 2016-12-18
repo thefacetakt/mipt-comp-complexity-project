@@ -1,6 +1,6 @@
 from tm_iterating import generate_all_tms
 from cnf_utils import check_3cnf, run_3cnf
-from solutions import stupid
+from solutions import dpll
 import itertools
 import copy
 import time
@@ -31,8 +31,8 @@ def check_3sat(phi):
                     print(tm)
                     return (True, est)
         if (n >= 2 ** (correct[2]) * correct[2]):
-            print("Switching to stupid")
-            return stupid.check_3sat(phi)
+            print("Switching to dpll")
+            return dpll.check_3sat(phi)
 
 
 if __name__ == '__main__':
